@@ -11,7 +11,8 @@ import javax.swing.JPanel;
 
 public class GUI implements ActionListener{
 	
-	private int count = 0;
+	private int count = 1;
+	private int power = 1;
 	private JLabel label;
 	private JFrame frame;
 	private JPanel panel;
@@ -22,7 +23,7 @@ public class GUI implements ActionListener{
 		JButton button = new JButton("click");
 		button.addActionListener(this);
 		
-		label = new JLabel("Number of clicks: ");
+		label = new JLabel("clicks left to achieve perfection: " + count);
 		
 		panel = new JPanel();
 		panel.setBorder(BorderFactory.createEmptyBorder(30, 30, 10, 30));
@@ -43,8 +44,13 @@ public class GUI implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		count++;
-		label.setText("number of clicks: " + count);
+		count--;
+		label.setText("clicks left to achieve perfection: " + count);
+		if (count == 0) {
+			count = (int) Math.pow(2, power++) + 1;
+			label.setText("almost there...");
+		}
+		
 		
 	}
 
